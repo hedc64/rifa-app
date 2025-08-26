@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="300">
+  <title>Panel de Administración</title>
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Panel de Administración</h1>
+
+    <div id="login-form">
+      <h2>Iniciar Sesión</h2>
+      <form id="login">
+        <input type="text" id="username" placeholder="Usuario" required>
+        <input type="password" id="password" placeholder="Contraseña" required>
+        <button type="submit">Iniciar Sesión</button>
+      </form>
+    </div>
+
+    <div id="admin-panel" style="display: none;">
+      <h2>Gestión de Números</h2>
+      <div id="numbers-list"></div>
+
+      <h2>Configurar Sorteo</h2>
+      <form id="configure-sorteo-form">
+        <h3>Fecha del Sorteo</h3>
+        <input type="date" id="sorteo-date" required>
+        <button type="submit">Configurar Fecha</button>
+      </form>
+      <div id="current-sorteo-date" style="margin-top: 10px;">
+      <strong>Fecha actual:</strong> <span id="current-date">No configurada</span>
+    </div>
+
+      <h2>Validar Pagos</h2>
+      <div id="pending-payments">
+        <h3>Números Pendientes de Validación</h3>
+        <div id="pending-numbers-list"></div>
+        <button id="validate-selected">Validar Seleccionados</button>
+      </div>
+
+      <div id="validate-form">
+        <h3>Validación Individual</h3>
+        <input type="text" id="validate-number" placeholder="Número a validar" required>
+        <input type="text" id="validate-name" placeholder="Nombre completo" required>
+        <input type="text" id="validate-phone" placeholder="Teléfono" required>
+        <input type="text" id="validate-id" placeholder="Cédula" required>
+        <input type="text" id="validate-address" placeholder="Dirección">
+        <button type="submit">Validar Pago</button>
+      </div>
+
+      <h2>Declarar Ganador</h2>
+      <form id="winner-form">
+        <input type="text" id="winner-number" placeholder="Número ganador" required>
+        <input type="text" id="winner-name" placeholder="Nombre completo del ganador" required>
+        <input type="date" id="winner-date" required>
+        <button type="submit">Declarar Ganador</button>
+      </form>
+
+      <div id="winner-info"></div>
+
+      <h2>Resetear Rifa</h2>
+      <button id="reset-raffle">Resetear para Nuevo Sorteo</button>
+    </div>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>

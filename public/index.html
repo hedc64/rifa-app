@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="300">
+  <title>Rifa Visa</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Rifa para Asesoría de Visa</h1>
+    
+    <!-- Recuadros informativos con colores diferentes -->
+    <div class="info-box premio-box">
+      <p>Premio: Asesoría para Visa de Turismo</p>
+      <p>Valor por número: $2.000 COP</p>
+    </div>
+    
+    <div class="info-box sorteo-box" id="sorteo-date">
+      <p>Sorteo: Cargando fecha...</p>
+    </div>
+
+    <div class="info-box valor-box">
+      <p style="color: rgb(13, 12, 14);">Seleccione los números de su preferencia</p>
+    </div>
+
+    <div id="numbers-grid" class="grid"></div>
+
+    <div id="selection-info" style="display: none;" class="selection-container">
+      <h2>Números Seleccionados</h2>
+      <ul id="selected-list"></ul>
+      
+      <div id="confirmation" class="confirmation-box" style="display: none;">
+        <h3>Confirmar Selección</h3>
+        <p>Al confirmar, aceptas las condiciones de la rifa:</p>
+        <ul>
+          <li>El pago debe realizarse en un máximo de 1 hora.</li>
+          <li>Debes enviar el comprobante de pago al WhatsApp indicado.</li>
+          <li>Si no se realiza el pago en el tiempo establecido, los números se liberarán.</li>
+          <li>Fecha del sorteo: <span id="confirmation-date">Cargando...</span></li>
+        </ul>
+        
+        <div class="terms-section">
+          <h5>Importante: Leer los terminos y condiciones.</h5>
+          <div class="terms-checkbox">
+            <input type="checkbox" id="accept-terms">
+            <label for="accept-terms">Acepto los <a href="terminos.html" target="_self">Términos y Condiciones</a> de la rifa</label>
+          </div>
+          <button id="confirm-selection" disabled>Confirmar Selección</button>
+        </div>
+      </div>
+      
+      <div id="payment-info" class="payment-box" style="display: none;">
+        <h3>Instrucciones de Pago</h3>
+        <div class="payment-step">
+          <p><strong>Paso 1:</strong> Pague $2.000 COP por número a través de Nequi o corresponsal</p>
+        </div>
+        <div class="payment-step">
+          <p><strong>Paso 2:</strong> Numero NEQUI para pagos: 3114521045</p>
+        </div>
+        <div class="payment-step">
+          <p><strong>Paso 3:</strong> Envíe comprobante y datos al WhatsApp: +57 311 452 1045</p>
+        </div>
+        <div class="payment-step">
+          <p><strong>Paso 4:</strong> Tienes 1 hora para completar el pago</p>
+        </div>
+        <div class="payment-step">
+          <p><strong>Fecha del sorteo:</strong> <span id="payment-date">Cargando...</span></p>
+        </div>
+        <a id="whatsapp-link" target="_blank" class="btn">Enviar por WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

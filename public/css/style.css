@@ -1,0 +1,241 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f4f4f4;
+  padding: 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+/* Recuadros informativos con colores diferentes */
+.info-box {
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  font-weight: 500;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.premio-box {
+  background-color: #3498db; /* Azul */
+  color: white;
+}
+
+.valor-box {
+  background-color: #2ecc71; /* Verde */
+  color: white;
+}
+
+.sorteo-box {
+  background-color: #e74c3c; /* Rojo */
+  color: white;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.number {
+  padding: 15px;
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.number:hover {
+  transform: scale(1.05);
+}
+
+.disponible {
+  background-color: #2ecc71;
+  color: white;
+}
+
+.seleccionado {
+  background-color: #f39c12;
+  color: white;
+  cursor: default; /* No permitir clic en números seleccionados */
+}
+
+.comprado {
+  background-color: #e74c3c;
+  color: white;
+  cursor: default;
+}
+
+.ganador {
+  background-color: #3498db;
+  color: white;
+  animation: pulse 2s infinite;
+  cursor: default;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.selection-container {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #ecf0f1;
+  border-radius: 10px;
+}
+
+#selected-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+#selected-list li {
+  background: #3498db;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 3px;
+}
+
+.confirmation-box {
+  background-color: #f8f9fa;
+  border-left: 4px solid #17a2b8;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.confirmation-box h3 {
+  color: #17a2b8;
+  margin-bottom: 10px;
+}
+
+.confirmation-box ul {
+  margin-left: 20px;
+  margin-bottom: 15px;
+}
+
+.payment-box {
+  background-color: #f8f9fa;
+  border-left: 4px solid #28a745;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.payment-box h3 {
+  color: #28a745;
+  margin-bottom: 15px;
+}
+
+.payment-step {
+  background-color: #e9f7ef;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border-left: 3px solid #28a745;
+}
+
+.btn {
+  display: inline-block;
+  background: #27ae60;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  margin-top: 15px;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background: #2ecc71;
+}
+
+button {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background: #2980b9;
+}
+
+/* Agregar al final del archivo existente */
+
+.terms-section {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #ddd;
+}
+
+.terms-checkbox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.terms-checkbox input[type="checkbox"] {
+  margin-right: 10px;
+  transform: scale(1.2);
+}
+
+.terms-checkbox label {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.terms-checkbox a {
+  color: #3498db;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.terms-checkbox a:hover {
+  text-decoration: underline;
+}
+
+#confirm-selection:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+#confirm-selection:not(:disabled) {
+  background-color: #27ae60;
+}
+
+#confirm-selection:not(:disabled):hover {
+  background-color: #2ecc71;
+}
