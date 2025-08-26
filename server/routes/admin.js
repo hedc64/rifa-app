@@ -221,4 +221,12 @@ router.post('/reset', authMiddleware, (req, res) => {
     );
 });
 
+// Ruta temporal para ver datos de la base de datos
+router.get('/view-data', authMiddleware, (req, res) => {
+    db.all("SELECT * FROM numbers ORDER BY number", (err, rows) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json(rows);
+    });
+});
+
 module.exports = router;
