@@ -1,4 +1,5 @@
 //server/server.js
+// server.js
 require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -7,10 +8,24 @@ const fs = require('fs'); // Módulo para manejo de archivos
 const db = require('./db');
 const apiRoutes = require('./routes/api');
 const adminRoutes = require('./routes/admin');
-
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Middleware para redirigir HTTP a HTTPS (excepto para /admin/view-data)
+app.use((req, res, next) => {
+  // Permitir HTTP para la ruta específica /admin/view-data
+  if (req.path === '/admin/view-data') {
+    return next();
+  }
+  
+  // Para todas las demás rutas, redirigir a HTTPS
+  if (req.protocol === 'http') {
+    return res.redirect(301, `https://${req.headers.host}${req.url}`);
+  }
+  
+  next();
+});
 
 // Servir archivos estáticos
 app.use(express.static(path.join(__dirname, '../public')));

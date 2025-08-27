@@ -1,4 +1,5 @@
 //server/routes/admin.js
+//server/routes/admin.js
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
@@ -30,7 +31,7 @@ router.get('/numbers', authMiddleware, (req, res) => {
     });
 });
 
-// Ruta temporal para ver datos de la base de datos
+// Ruta para ver datos de la base de datos (accesible por HTTP)
 router.get('/view-data', authMiddleware, (req, res) => {
     db.all("SELECT * FROM numbers ORDER BY number", (err, rows) => {
         if (err) return res.status(500).json({ error: err.message });
