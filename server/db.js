@@ -58,7 +58,7 @@ function initializeDatabase() {
         }
     });
 
-    // Crear tabla de configuración (¡ESTA ES LA PARTE IMPORTANTE!)
+    // Crear tabla de configuración
     db.run(`
         CREATE TABLE IF NOT EXISTS config (
             key TEXT PRIMARY KEY,
