@@ -49,6 +49,33 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 
+    // Función para verificar si hay un ganador declarado
+    function checkWinner() {
+        fetch('/api/has-winner')
+            .then(response => response.json())
+            .then(data => {
+                if (data.hasWinner) {
+                    // Mostrar mensaje de sorteo finalizado
+                    const winnerMessage = document.createElement('div');
+                    winnerMessage.className = 'winner-message';
+                    winnerMessage.innerHTML = '<h2>¡Sorteo Finalizado!</h2><p>Ya se ha declarado un ganador para este sorteo.</p>';
+                    
+                    // Deshabilitar la selección de números
+                    grid.style.pointerEvents = 'none';
+                    grid.style.opacity = '0.7';
+                    
+                    // Insertar el mensaje antes de la grilla
+                    grid.parentNode.insertBefore(winnerMessage, grid);
+                    
+                    // Ocultar la sección de selección
+                    selectionInfo.style.display = 'none';
+                }
+            })
+            .catch(error => {
+                console.error('Error al verificar ganador:', error);
+            });
+    }
+
     // Cargar números
     function loadNumbers() {
         fetch('/api/numbers')
@@ -71,9 +98,10 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 
-    // Cargar números y fecha del sorteo al inicio
+    // Cargar números, fecha del sorteo y verificar ganador al inicio
     loadNumbers();
     loadSorteoDate();
+    checkWinner();
 
     function selectNumber(e) {
         const number = e.target.dataset.number;

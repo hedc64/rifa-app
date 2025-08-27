@@ -162,6 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Agregar información adicional en tooltip
                 let info = `Número: ${num.number}\nEstado: ${num.status}`;
                 if (num.buyer_name) info += `\nComprador: ${num.buyer_name}`;
+                if (num.buyer_id) info += `\nID: ${num.buyer_id}`;
                 if (num.winner_name) info += `\nGanador: ${num.winner_name}`;
                 div.title = info;
                 
@@ -171,6 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
                           `Estado: ${num.status}\n` +
                           (num.buyer_name ? `Comprador: ${num.buyer_name}\n` : '') +
                           (num.buyer_phone ? `Teléfono: ${num.buyer_phone}\n` : '') +
+                          (num.buyer_id ? `ID: ${num.buyer_id}\n` : '') +
                           (num.winner_name ? `Ganador: ${num.winner_name}\n` : '') +
                           (num.draw_date ? `Fecha sorteo: ${formatDate(num.draw_date)}` : ''));
                 });
@@ -191,7 +193,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     const label = document.createElement('label');
                     label.htmlFor = `pending-${num.number}`;
-                    label.textContent = num.number;
+                    
+                    // Mostrar el número y el ID del comprador
+                    label.innerHTML = `
+                        <span class="number-display">${num.number}</span>
+                        ${num.buyer_id ? `<span class="buyer-id">ID: ${num.buyer_id}</span>` : ''}
+                    `;
                     
                     pendingDiv.appendChild(checkbox);
                     pendingDiv.appendChild(label);

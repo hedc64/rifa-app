@@ -16,19 +16,41 @@ router.get('/numbers', (req, res) => {
     });
 });
 
+// Verificar si hay un ganador declarado
+router.get('/has-winner', (req, res) => {
+    db.get("SELECT * FROM numbers WHERE status = 'ganador' LIMIT 1", (err, row) => {
+        if (err) {
+            console.error('Error al verificar ganador:', err);
+            return res.status(500).json({ error: err.message });
+        }
+        res.json({ hasWinner: !!row });
+    });
+});
+
 // Obtener fecha del sorteo configurada
 router.get('/sorteo-date', (req, res) => {
-    db.get("SELECT value FROM config WHERE key = 'sorteo_date'", (err, row) => {
+    db.get("SELECT draw_date FROM numbers WHERE status = 'ganador' ORDER BY draw_date DESC LIMIT 1", (err, row) => {
         if (err) {
-            console.error('Error al obtener configuración:', err);
+            console.error('Error al obtener fecha del sorteo:', err);
             return res.status(500).json({ error: err.message });
         }
         
-        if (row && row.value) {
-            // Devolver la fecha en formato YYYY-MM-DD
-            res.json({ date: row.value });
+        if (row && row.draw_date) {
+            res.json({ date: row.draw_date });
         } else {
-            res.json({ date: null });
+            // Si no hay ganador, buscar una fecha configurada para el próximo sorteo
+            db.get("SELECT value FROM config WHERE key = 'sorteo_date'", (err, configRow) => {
+                if (err) {
+                    console.error('Error al obtener configuración:', err);
+                    return res.status(500).json({ error: err.message });
+                }
+                
+                if (configRow && configRow.value) {
+                    res.json({ date: configRow.value });
+                } else {
+                    res.json({ date: null });
+                }
+            });
         }
     });
 });
