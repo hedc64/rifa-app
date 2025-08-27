@@ -114,7 +114,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Función para cargar la fecha actual del sorteo
     function loadCurrentSorteoDate() {
         fetch('/api/sorteo-date')
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al obtener fecha del sorteo');
+                }
+                return response.json();
+            })
             .then(data => {
                 const currentDateElement = document.getElementById('current-date');
                 if (data.date) {

@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="refresh" content="300">
   <title>Panel de Administración</title>
   <link rel="stylesheet" href="css/admin.css">
 </head>
@@ -30,9 +29,6 @@
         <input type="date" id="sorteo-date" required>
         <button type="submit">Configurar Fecha</button>
       </form>
-      <div id="current-sorteo-date" style="margin-top: 10px;">
-      <strong>Fecha actual:</strong> <span id="current-date">No configurada</span>
-    </div>
 
       <h2>Validar Pagos</h2>
       <div id="pending-payments">
@@ -41,15 +37,15 @@
         <button id="validate-selected">Validar Seleccionados</button>
       </div>
 
-      <div id="validate-form">
-        <h3>Validación Individual</h3>
+      <h2>Validación Individual</h2>
+      <form id="validate-form">
         <input type="text" id="validate-number" placeholder="Número a validar" required>
         <input type="text" id="validate-name" placeholder="Nombre completo" required>
         <input type="text" id="validate-phone" placeholder="Teléfono" required>
         <input type="text" id="validate-id" placeholder="Cédula" required>
         <input type="text" id="validate-address" placeholder="Dirección">
         <button type="submit">Validar Pago</button>
-      </div>
+      </form>
 
       <h2>Declarar Ganador</h2>
       <form id="winner-form">

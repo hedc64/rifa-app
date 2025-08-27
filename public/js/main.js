@@ -32,18 +32,18 @@ document.addEventListener('DOMContentLoaded', () => {
                         day: 'numeric'
                     });
                     
-                    sorteoDateElement.textContent = `Sorteo: ${formattedDate} (dos últimas cifras sorteo Astro Luna)`;
+                    sorteoDateElement.textContent = `Sorteo: ${formattedDate} (Astro Luna)`;
                     confirmationDateElement.textContent = formattedDate;
                     paymentDateElement.textContent = formattedDate;
                 } else {
-                    sorteoDateElement.textContent = 'Sorteo: Próximamente (dos últimas cifras sorteo Astro Luna)';
+                    sorteoDateElement.textContent = 'Sorteo: Próximamente (Astro Luna)';
                     confirmationDateElement.textContent = 'Próximamente';
                     paymentDateElement.textContent = 'Próximamente';
                 }
             })
             .catch(error => {
                 console.error('Error al cargar fecha del sorteo:', error);
-                sorteoDateElement.textContent = 'Sorteo: Próximamente (dos últimas cifras sorteo Astro Luna)';
+                sorteoDateElement.textContent = 'Sorteo: Próximamente (Astro Luna)';
                 confirmationDateElement.textContent = 'Próximamente';
                 paymentDateElement.textContent = 'Próximamente';
             });
@@ -52,7 +52,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Función para verificar si hay un ganador declarado
     function checkWinner() {
         fetch('/api/has-winner')
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al verificar ganador');
+                }
+                return response.json();
+            })
             .then(data => {
                 if (data.hasWinner) {
                     // Mostrar mensaje de sorteo finalizado
@@ -79,7 +84,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Cargar números
     function loadNumbers() {
         fetch('/api/numbers')
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al obtener números');
+                }
+                return response.json();
+            })
             .then(numbers => {
                 grid.innerHTML = ''; // Limpiar la grilla antes de cargar
                 numbers.forEach(num => {
@@ -95,6 +105,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     grid.appendChild(div);
                 });
+            })
+            .catch(error => {
+                console.error('Error al cargar números:', error);
             });
     }
 
@@ -169,12 +182,17 @@ document.addEventListener('DOMContentLoaded', () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 numbers: selectedNumbers,
-                buyerName: buyerName,
-                buyerPhone: buyerPhone,
-                buyerId: buyerId
+                buyerName,
+                buyerPhone,
+                buyerId
             })
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al seleccionar números');
+            }
+            return response.json();
+        })
         .then(data => {
             if (data.message) {
                 alert(data.message);

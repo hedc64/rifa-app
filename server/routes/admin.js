@@ -30,7 +30,14 @@ router.get('/numbers', authMiddleware, (req, res) => {
     });
 });
 
-// Configurar fecha del sorteo
+// Ruta temporal para ver datos de la base de datos
+router.get('/view-data', authMiddleware, (req, res) => {
+    db.all("SELECT * FROM numbers ORDER BY number", (err, rows) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json(rows);
+    });
+});
+
 // Configurar fecha del sorteo
 router.post('/configure-sorteo', authMiddleware, (req, res) => {
     const { sorteoDate } = req.body;
@@ -185,7 +192,7 @@ router.post('/winner', authMiddleware, (req, res) => {
     );
 });
 
-// Resetear rifa para nuevo sorteo (modificado)
+// Resetear rifa para nuevo sorteo
 router.post('/reset', authMiddleware, (req, res) => {
     db.run(
         `UPDATE numbers SET 
@@ -212,14 +219,6 @@ router.post('/reset', authMiddleware, (req, res) => {
             );
         }
     );
-});
-
-// Ruta temporal para ver datos de la base de datos
-router.get('/view-data', authMiddleware, (req, res) => {
-    db.all("SELECT * FROM numbers ORDER BY number", (err, rows) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.json(rows);
-    });
 });
 
 module.exports = router;
