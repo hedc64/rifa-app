@@ -169,9 +169,9 @@ document.addEventListener('DOMContentLoaded', () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 numbers: selectedNumbers,
-                buyerName,
-                buyerPhone,
-                buyerId
+                buyerName: buyerName,
+                buyerPhone: buyerPhone,
+                buyerId: buyerId
             })
         })
         .then(response => response.json())
