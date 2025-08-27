@@ -57,6 +57,20 @@ function initializeDatabase() {
             createAdminUser();
         }
     });
+
+    // Crear tabla de configuración (¡ESTA ES LA PARTE IMPORTANTE!)
+    db.run(`
+        CREATE TABLE IF NOT EXISTS config (
+            key TEXT PRIMARY KEY,
+            value TEXT
+        )
+    `, (err) => {
+        if (err) {
+            console.error('Error al crear la tabla config', err.message);
+        } else {
+            console.log('Tabla "config" verificada/creada');
+        }
+    });
 }
 
 // Función para agregar nuevas columnas si no existen
@@ -71,8 +85,6 @@ function addNewColumns() {
         db.run(`ALTER TABLE numbers ADD COLUMN ${col.name} ${col.type}`, (err) => {
             if (err && !err.message.includes('duplicate column name')) {
                 console.error(`Error al agregar columna ${col.name}:`, err.message);
-            } else if (!err) {
-                console.log(`Columna ${col.name} agregada correctamente`);
             }
         });
     });
