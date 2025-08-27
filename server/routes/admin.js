@@ -31,6 +31,7 @@ router.get('/numbers', authMiddleware, (req, res) => {
 });
 
 // Configurar fecha del sorteo
+// Configurar fecha del sorteo
 router.post('/configure-sorteo', authMiddleware, (req, res) => {
     const { sorteoDate } = req.body;
     
@@ -38,26 +39,18 @@ router.post('/configure-sorteo', authMiddleware, (req, res) => {
         return res.status(400).json({ error: 'Debe proporcionar una fecha para el sorteo' });
     }
     
-    // Crear tabla config si no existe
-    db.run(`CREATE TABLE IF NOT EXISTS config (
-        key TEXT PRIMARY KEY,
-        value TEXT
-    )`, (err) => {
-        if (err) return res.status(500).json({ error: err.message });
-        
-        // Guardar la fecha del sorteo en formato YYYY-MM-DD
-        const date = new Date(sorteoDate);
-        const formattedDate = date.toISOString().split('T')[0];
-        
-        db.run(
-            "INSERT OR REPLACE INTO config (key, value) VALUES ('sorteo_date', ?)",
-            [formattedDate],
-            function(err) {
-                if (err) return res.status(500).json({ error: err.message });
-                res.json({ message: 'Fecha del sorteo configurada correctamente' });
-            }
-        );
-    });
+    // Guardar la fecha del sorteo en formato YYYY-MM-DD
+    const date = new Date(sorteoDate);
+    const formattedDate = date.toISOString().split('T')[0];
+    
+    db.run(
+        "INSERT OR REPLACE INTO config (key, value) VALUES ('sorteo_date', ?)",
+        [formattedDate],
+        function(err) {
+            if (err) return res.status(500).json({ error: err.message });
+            res.json({ message: 'Fecha del sorteo configurada correctamente' });
+        }
+    );
 });
 
 // Validar pago individual
