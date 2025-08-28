@@ -151,4 +151,8 @@ function createAdminUser() {
     );
 }
 
+const ensureSchema = require('./ensureSchema');
+ensureSchema(); // ✅ Verifica y crea todo lo necesario
+
 module.exports = db;
+
