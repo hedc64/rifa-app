@@ -32,18 +32,18 @@ document.addEventListener('DOMContentLoaded', () => {
                         day: 'numeric'
                     });
                     
-                    sorteoDateElement.textContent = `Sorteo: ${formattedDate} (Astro Luna)`;
+                    sorteoDateElement.textContent = `Sorteo: ${formattedDate} (Ultimas dos cifras del sorteo Astro Luna)`;
                     confirmationDateElement.textContent = formattedDate;
                     paymentDateElement.textContent = formattedDate;
                 } else {
-                    sorteoDateElement.textContent = 'Sorteo: Próximamente (Astro Luna)';
+                    sorteoDateElement.textContent = 'Sorteo: Próximamente (Ultimas dos cifras del sorteo Astro Luna)';
                     confirmationDateElement.textContent = 'Próximamente';
                     paymentDateElement.textContent = 'Próximamente';
                 }
             })
             .catch(error => {
                 console.error('Error al cargar fecha del sorteo:', error);
-                sorteoDateElement.textContent = 'Sorteo: Próximamente (Astro Luna)';
+                sorteoDateElement.textContent = 'Sorteo: Próximamente (Ultimas dos cifras del sorteo Astro Luna)';
                 confirmationDateElement.textContent = 'Próximamente';
                 paymentDateElement.textContent = 'Próximamente';
             });

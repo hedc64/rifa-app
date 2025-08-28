@@ -71,6 +71,19 @@ function initializeDatabase() {
             console.log('Tabla "config" verificada/creada');
         }
     });
+
+    db.run(`
+        INSERT OR IGNORE INTO config (key, value)
+        VALUES ('sorteo_date', '2025-09-01')
+        `, function(err) {
+        if (err) {
+        console.error('Error al insertar sorteo_date:', err.message);
+        } else if (this.changes > 0) {
+        console.log('Valor "sorteo_date" insertado en config');
+        } else {
+        console.log('Valor "sorteo_date" ya existía en config');
+        }
+    });
 }
 
 // Función para agregar nuevas columnas si no existen
