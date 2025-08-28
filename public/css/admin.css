@@ -1,6 +1,73 @@
-/* Estilos similares a style.css con modificaciones para admin */
+:root {
+  --color-blue: #3498db;
+  --color-blue-dark: #2980b9;
+  --color-green: #2ecc71;
+  --color-light: #ecf0f1;
+  --color-success: #d4edda;
+  --color-border: #ddd;
+  --color-text: #333;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--color-light);
+  color: var(--color-text);
+  padding: 20px;
+}
+
 .container {
   max-width: 1000px;
+  margin: 0 auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1, h2, h3 {
+  color: var(--color-blue);
+  margin-bottom: 15px;
+}
+
+form {
+  margin: 20px 0;
+  padding: 15px;
+  background: var(--color-light);
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0 10px 0;
+  border: 1px solid var(--color-border);
+  border-radius: 3px;
+  font-size: 1em;
+}
+
+input:focus {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 2px;
+}
+
+button {
+  background: var(--color-blue);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background: var(--color-blue-dark);
+}
+
+button:focus {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 2px;
 }
 
 #numbers-list {
@@ -10,37 +77,54 @@
   margin: 20px 0;
 }
 
-form {
-  margin: 20px 0;
-  padding: 15px;
-  background: #ecf0f1;
+.number {
+  padding: 12px;
+  text-align: center;
   border-radius: 5px;
-}
-
-input {
-  width: 100%;
-  padding: 10px;
-  margin: 5px 0;
-  border: 1px solid #ddd;
-  border-radius: 3px;
-}
-
-button {
-  background: #3498db;
+  font-weight: bold;
   color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 3px;
   cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
-button:hover {
-  background: #2980b9;
+.number:hover {
+  transform: scale(1.05);
+}
+
+.disponible { background-color: var(--color-green); }
+.seleccionado { background-color: #f39c12; }
+.comprado { background-color: #e74c3c; }
+.ganador { background-color: var(--color-blue); animation: pulse 2s infinite; }
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.9; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
 #winner-info {
   margin-top: 20px;
   padding: 15px;
-  background: #d4edda;
+  background: var(--color-success);
   border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+/* Responsividad */
+@media (max-width: 600px) {
+  .container {
+    padding: 15px;
+  }
+
+  #numbers-list {
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+  }
+
+  input {
+    font-size: 0.95em;
+  }
+
+  button {
+    width: 100%;
+  }
 }

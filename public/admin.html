@@ -5,41 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="refresh" content="300">
   <title>Panel de Administración</title>
+
+  <!-- Meta etiquetas para redes sociales -->
+  <meta property="og:title" content="Panel de Administración - Rifa Visa">
+  <meta property="og:description" content="Gestiona números, pagos y ganadores de la rifa de asesoría de visa.">
+  <meta property="og:image" content="https://tusitio.com/admin-preview.jpg">
+  <meta property="og:url" content="https://rifa-app-t8qo.onrender.com/admin.html">
+  <meta property="og:type" content="website">
+
   <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Panel de Administración</h1>
+  <main class="container" role="main">
+    <header>
+      <h1>Panel de Administración</h1>
+    </header>
 
-    <div id="login-form">
+    <section id="login-form" aria-label="Formulario de acceso">
       <h2>Iniciar Sesión</h2>
       <form id="login">
         <input type="text" id="username" placeholder="Usuario" required>
         <input type="password" id="password" placeholder="Contraseña" required>
         <button type="submit">Iniciar Sesión</button>
       </form>
-    </div>
+    </section>
 
-    <div id="admin-panel" style="display: none;">
+    <section id="admin-panel" aria-label="Panel administrativo" hidden>
       <h2>Gestión de Números</h2>
-      <div id="numbers-list"></div>
+      <div id="numbers-list" aria-label="Listado de números"></div>
 
       <h2>Configurar Sorteo</h2>
-      <form id="configure-sorteo-form">
+      <form id="configure-sorteo-form" aria-label="Formulario de configuración de sorteo">
         <h3>Fecha del Sorteo</h3>
         <input type="date" id="sorteo-date" required>
         <button type="submit">Configurar Fecha</button>
+        <p><strong>Fecha actual:</strong> <span id="current-date">Cargando...</span></p>
       </form>
 
       <h2>Validar Pagos</h2>
-      <div id="pending-payments">
+      <section id="pending-payments" aria-label="Validación múltiple">
         <h3>Números Pendientes de Validación</h3>
         <div id="pending-numbers-list"></div>
         <button id="validate-selected">Validar Seleccionados</button>
-      </div>
+      </section>
 
       <h2>Validación Individual</h2>
-      <form id="validate-form">
+      <form id="validate-form" aria-label="Formulario de validación individual">
         <input type="text" id="validate-number" placeholder="Número a validar" required>
         <input type="text" id="validate-name" placeholder="Nombre completo" required>
         <input type="text" id="validate-phone" placeholder="Teléfono" required>
@@ -49,19 +60,19 @@
       </form>
 
       <h2>Declarar Ganador</h2>
-      <form id="winner-form">
+      <form id="winner-form" aria-label="Formulario de declaración de ganador">
         <input type="text" id="winner-number" placeholder="Número ganador" required>
         <input type="text" id="winner-name" placeholder="Nombre completo del ganador" required>
         <input type="date" id="winner-date" required>
         <button type="submit">Declarar Ganador</button>
       </form>
 
-      <div id="winner-info"></div>
+      <div id="winner-info" aria-label="Información del ganador"></div>
 
       <h2>Resetear Rifa</h2>
       <button id="reset-raffle">Resetear para Nuevo Sorteo</button>
-    </div>
-  </div>
+    </section>
+  </main>
 
   <script src="js/admin.js"></script>
 </body>

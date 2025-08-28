@@ -1,3 +1,14 @@
+:root {
+  --color-blue: #3498db;
+  --color-green: #2ecc71;
+  --color-red: #e74c3c;
+  --color-orange: #f39c12;
+  --color-gray: #f4f4f4;
+  --color-light: #f8f9fa;
+  --color-dark: #2c3e50;
+  --color-muted: #666;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -8,7 +19,7 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
   color: #333;
-  background-color: #f4f4f4;
+  background-color: var(--color-gray);
   padding: 20px;
 }
 
@@ -24,10 +35,10 @@ body {
 h1 {
   text-align: center;
   margin-bottom: 20px;
-  color: #2c3e50;
+  color: var(--color-dark);
 }
 
-/* Recuadros informativos con colores diferentes */
+/* Recuadros informativos */
 .info-box {
   padding: 12px 15px;
   margin-bottom: 15px;
@@ -38,20 +49,21 @@ h1 {
 }
 
 .premio-box {
-  background-color: #3498db; /* Azul */
+  background-color: var(--color-blue);
   color: white;
 }
 
 .valor-box {
-  background-color: #2ecc71; /* Verde */
+  background-color: var(--color-green);
   color: white;
 }
 
 .sorteo-box {
-  background-color: #e74c3c; /* Rojo */
+  background-color: var(--color-red);
   color: white;
 }
 
+/* Grilla de números */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
@@ -73,35 +85,48 @@ h1 {
 }
 
 .disponible {
-  background-color: #2ecc71;
+  background-color: var(--color-green);
   color: white;
 }
 
 .seleccionado {
-  background-color: #f39c12;
+  background-color: var(--color-orange);
   color: white;
-  cursor: default; /* No permitir clic en números seleccionados */
+  cursor: default;
 }
 
 .comprado {
-  background-color: #e74c3c;
+  background-color: var(--color-red);
   color: white;
   cursor: default;
 }
 
 .ganador {
-  background-color: #3498db;
+  background-color: var(--color-blue);
   color: white;
   animation: pulse 2s infinite;
   cursor: default;
 }
 
 @keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.9; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
+/* Responsividad */
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(45px, 1fr));
+  }
+
+  .number {
+    padding: 10px;
+    font-size: 0.9em;
+  }
+}
+
+/* Panel de selección */
 .selection-container {
   margin-top: 30px;
   padding: 20px;
@@ -118,14 +143,15 @@ h1 {
 }
 
 #selected-list li {
-  background: #3498db;
+  background: var(--color-blue);
   color: white;
   padding: 5px 10px;
   border-radius: 3px;
 }
 
+/* Confirmación */
 .confirmation-box {
-  background-color: #f8f9fa;
+  background-color: var(--color-light);
   border-left: 4px solid #17a2b8;
   padding: 15px;
   margin-bottom: 20px;
@@ -142,8 +168,9 @@ h1 {
   margin-bottom: 15px;
 }
 
+/* Instrucciones de pago */
 .payment-box {
-  background-color: #f8f9fa;
+  background-color: var(--color-light);
   border-left: 4px solid #28a745;
   padding: 15px;
   border-radius: 5px;
@@ -162,6 +189,7 @@ h1 {
   border-left: 3px solid #28a745;
 }
 
+/* Botones */
 .btn {
   display: inline-block;
   background: #27ae60;
@@ -174,11 +202,11 @@ h1 {
 }
 
 .btn:hover {
-  background: #2ecc71;
+  background: var(--color-green);
 }
 
 button {
-  background: #3498db;
+  background: var(--color-blue);
   color: white;
   border: none;
   padding: 10px 15px;
@@ -192,6 +220,14 @@ button:hover {
   background: #2980b9;
 }
 
+button:focus,
+.btn:focus,
+input[type="checkbox"]:focus {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 2px;
+}
+
+/* Términos */
 .terms-section {
   margin-top: 20px;
   padding-top: 15px;
@@ -215,7 +251,7 @@ button:hover {
 }
 
 .terms-checkbox a {
-  color: #3498db;
+  color: var(--color-blue);
   text-decoration: none;
   font-weight: bold;
 }
@@ -235,10 +271,10 @@ button:hover {
 }
 
 #confirm-selection:not(:disabled):hover {
-  background-color: #2ecc71;
+  background-color: var(--color-green);
 }
 
-/* Estilos para el panel de administración */
+/* Panel de administración */
 .number-display {
   font-weight: bold;
   margin-right: 10px;
@@ -246,7 +282,7 @@ button:hover {
 
 .buyer-id {
   font-size: 0.8em;
-  color: #666;
+  color: var(--color-muted);
   background-color: #f0f0f0;
   padding: 2px 5px;
   border-radius: 3px;
@@ -258,7 +294,7 @@ button:hover {
   margin-bottom: 8px;
   padding: 5px;
   border-radius: 5px;
-  background-color: #f8f9fa;
+  background-color: var(--color-light);
 }
 
 .pending-number input[type="checkbox"] {
@@ -271,7 +307,7 @@ button:hover {
   cursor: pointer;
 }
 
-/* Estilos para el mensaje de ganador */
+/* Mensaje de ganador */
 .winner-message {
   background-color: #fff3cd;
   border: 1px solid #ffeeba;

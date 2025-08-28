@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estado de la Rifa</title>
+
+  <!-- Meta etiquetas para compartir -->
+  <meta property="og:title" content="Estado de la Rifa Visa">
+  <meta property="og:description" content="Consulta los números disponibles, comprados y ganadores de la rifa.">
+  <meta property="og:image" content="https://tusitio.com/estado-preview.jpg">
+  <meta property="og:url" content="https://rifa-app-t8qo.onrender.com/estado.html">
+  <meta property="og:type" content="website">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <main class="container" role="main">
+    <header>
+      <h1>Estado Actual de la Rifa</h1>
+    </header>
+
+    <section class="info-box premio-box" aria-label="Premio">
+      <p>Premio: Una Asesoría para Visa de Turismo</p>
+      <p>Valor por número: $2.000 COP</p>
+    </section>
+
+    <section class="info-box sorteo-box" id="sorteo-date" aria-label="Fecha del sorteo">
+      <p>Sorteo: Cargando fecha...</p>
+    </section>
+
+    <section class="info-box valor-box" aria-label="Leyenda de colores">
+      <p><strong>Verde:</strong> Disponible | <strong>Naranja:</strong> Seleccionado | <strong>Rojo:</strong> Comprado | <strong>Azul:</strong> Ganador</p>
+    </section>
+
+    <section id="numbers-grid" class="grid" aria-label="Grilla de números"></section>
+  </main>
+
+  <script>
+    // Cargar fecha del sorteo
+    fetch('/api/sorteo-date')
+      .then(res => res.json())
+      .then(data => {
+        const sorteoDateElement = document.getElementById('sorteo-date');
+        if (data.date) {
+          const [year, month, day] = data.date.split('-');
+          const date = new Date(year, month - 1, day);
+          const formatted = date.toLocaleDateString('es-ES', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          });
+          sorteoDateElement.innerHTML = `<p>Sorteo: ${formatted} (Últimas dos cifras del sorteo Astro Luna)</p>`;
+        } else {
+          sorteoDateElement.innerHTML = `<p>Sorteo: Próximamente (Últimas dos cifras del sorteo Astro Luna)</p>`;
+        }
+      });
+
+    // Cargar estado de los números
+    fetch('/api/numbers')
+      .then(res => res.json())
+      .then(numbers => {
+        const grid = document.getElementById('numbers-grid');
+        grid.innerHTML = '';
+        numbers.forEach(num => {
+          const div = document.createElement('div');
+          div.className = `number ${num.status}`;
+          div.textContent = num.number;
+          grid.appendChild(div);
+        });
+      });
+  </script>
+</body>
+</html>
