@@ -110,6 +110,10 @@ router.post('/validate-multiple', authMiddleware, (req, res) => {
     return res.status(400).json({ error: 'Debe seleccionar al menos un número' });
   }
 
+  if (!buyer_name || !buyer_phone || !buyer_id) {
+    return res.status(400).json({ error: 'Faltan datos del comprador para validación múltiple' });
+  }
+
   const validatedAt = new Date().toISOString();
   const placeholders = numbers.map(() => '?').join(',');
 
