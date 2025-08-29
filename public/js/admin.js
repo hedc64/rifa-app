@@ -284,4 +284,43 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+  
+  // ver base de datos
+  const viewDataButton = document.getElementById('view-data-button');
+  const viewDataOutput = document.getElementById('view-data-output');
+
+  if (viewDataButton) {
+    viewDataButton.addEventListener('click', () => {
+      fetchWithAuth('/admin/view-data')
+        .then(res => res.ok ? res.json() : Promise.reject('Error al obtener datos'))
+        .then(data => {
+          if (!Array.isArray(data) || data.length === 0) {
+            viewDataOutput.innerHTML = '<p>No hay datos disponibles.</p>';
+            return;
+            }
+
+          let html = '<table border="1" cellpadding="5" cellspacing="0"><thead><tr>' +
+            '<th>Número</th><th>Nombre</th><th>Teléfono</th><th>Cédula</th><th>Dirección</th><th>Fecha Validación</th>' +
+            '</tr></thead><tbody>';
+
+          data.forEach(row => {
+            html += `<tr>
+              <td>${row.number}</td>
+              <td>${row.buyer_name || ''}</td>
+              <td>${row.buyer_phone || ''}</td>
+              <td>${row.buyer_id || ''}</td>
+              <td>${row.buyer_address || ''}</td>
+              <td>${row.validated_at ? row.validated_at.split('T')[0] : ''}</td>
+            </tr>`;
+          });
+
+          html += '</tbody></table>';
+          viewDataOutput.innerHTML = html;
+        })
+        .catch(err => {
+          console.error('Error al consultar datos:', err);
+          viewDataOutput.innerHTML = `<p style="color:red;">${err}</p>`;
+        });
+    });
+  }
 });
