@@ -114,7 +114,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const label = document.createElement('label');
             label.htmlFor = checkbox.id;
-            label.innerHTML = `<span class="number-display">${num.number}</span>`;
+            label.innerHTML = `
+              <span class="number-display">${num.number}</span>
+              <span class="buyer-id">ID: ${num.buyer_id || '—'}</span>`;
 
             pendingDiv.appendChild(checkbox);
             pendingDiv.appendChild(label);
