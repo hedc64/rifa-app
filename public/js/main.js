@@ -168,12 +168,12 @@ document.addEventListener('DOMContentLoaded', () => {
           paymentInfo.style.display = 'block';
 
           //const message = `Hola, deseo comprar los números: ${selectedNumbers.join(', ')}. Mis datos son: ${buyerName}, ${buyerPhone}, ${buyerId}. Realizaré pago por Nequi y adjuntaré comprobante.`;
-          //whatsappLink.href = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}. Mis datos son: ${buyerName}, ${buyerPhone}, ${buyerId}. Realizaré pago por Nequi y adjuntaré comprobante.`;
+          //whatsappLink.href = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
           const total = selectedNumbers.length * 2000;
-          const mensaje = `Hola, quiero pagar $${total} COP por ${selectedNumbers.length} números.`;
-          const whatsappLink = `https://wa.me/573114521045?text=${encodeURIComponent(mensaje)}`;
-          window.location.href = whatsappLink;
+          const mensaje = `Hola, quiero pagar $${total} COP por ${selectedNumbers.length} números. Mis datos son: ${buyerName}, ${buyerPhone}, ${buyerId}. Hare el pago por Nequi y adjuntaré el comprobante.`;
+          const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(mensaje)}`;
+          //window.location.href = whatsappLink;
           
           selectedNumbers = [];
           acceptTermsCheckbox.checked = false;
